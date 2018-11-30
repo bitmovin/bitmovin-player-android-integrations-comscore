@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bitmovinPlayerView = findViewById(R.id.bitmovinPlayerView);
         vodButton.setOnClickListener(this);
 
-        ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET");
+        ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR_APPLICATION_NAME");
         ComScoreAnalytics.addConfiguration(comScoreConfiguration);
         ComScoreAnalytics.start(getApplicationContext());
 

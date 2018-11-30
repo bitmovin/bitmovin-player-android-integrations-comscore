@@ -30,7 +30,7 @@ dependencies {
 How to setup ComScoreAnalytics for app lifecycle tracking. Do this once your application loads
 
 ```java
-ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET");
+ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR APPLICATION NAME");
 ComScoreAnalytics.addConfiguration(comScoreConfiguration);
 ComScoreAnalytics.start(getApplicationContext());
 ```

@@ -120,8 +120,8 @@ public class ComScoreMetadataBuilder {
         return this;
     }
 
-    public ComScoreMetadata build(){
-        return new ComScoreMetadata(mediaType,uniqueContentId,publisherBrandName,programTitle,programId,episodeTitle,episodeId,episodeSeasonNumber,episodeNumber,contentGenre,advertisementLoad,digitalAirdate,tvAirdate,stationTitle,c3,c4,c6,completeEpisode,feedType);
+    public ComScoreMetadata build() {
+        return new ComScoreMetadata(mediaType, uniqueContentId, publisherBrandName, programTitle, programId, episodeTitle, episodeId, episodeSeasonNumber, episodeNumber, contentGenre, advertisementLoad, digitalAirdate, tvAirdate, stationTitle, c3, c4, c6, completeEpisode, feedType);
     }
 
 }

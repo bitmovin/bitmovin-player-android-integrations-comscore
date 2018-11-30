@@ -135,10 +135,10 @@ public class ComScoreBitmovinAdapter {
         double duration = bitmovinPlayer.getDuration();
         if (Double.isInfinite(duration)) {
             duration = 0;
-        }else {
-            duration = duration *1000;
+        } else {
+            duration = duration * 1000;
         }
-        metadata.put("ns_st_cl",String.valueOf(duration));
+        metadata.put("ns_st_cl", String.valueOf(duration));
 
         if (comScoreState != ComScoreState.VIDEO) {
             if (comScoreState != ComScoreState.STOPPED) {
