@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bitmovin-player-android-integrations-comscore.iml" filepath="$PROJECT_DIR$/bitmovin-player-android-integrations-comscore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comscoreanalytics/comscoreanalytics.iml" filepath="$PROJECT_DIR$/comscoreanalytics/comscoreanalytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comscoreanalyticssample/comscoreanalyticssample.iml" filepath="$PROJECT_DIR$/comscoreanalyticssample/comscoreanalyticssample.iml" />
+    </modules>
+  </component>
+</project>
