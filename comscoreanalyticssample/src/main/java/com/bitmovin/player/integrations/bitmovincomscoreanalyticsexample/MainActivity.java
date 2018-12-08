@@ -23,7 +23,6 @@ import com.bitmovin.player.integrations.comscoreanalytics.ComScoreAnalytics;
 import com.bitmovin.player.integrations.comscoreanalytics.ComScoreConfiguration;
 import com.bitmovin.player.integrations.comscoreanalytics.ComScoreMediaType;
 import com.bitmovin.player.integrations.comscoreanalytics.ComScoreMetadata;
-import com.bitmovin.player.integrations.comscoreanalytics.ComScoreMetadataBuilder;
 import com.bitmovin.player.integrations.comscoreanalytics.ComScoreStreamingAnalytics;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, KeyEvent.Callback {
@@ -86,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bitmovinPlayer = new BitmovinPlayer(getApplicationContext(), playerConfiguration);
         bitmovinPlayerView.setPlayer(bitmovinPlayer);
 
-        ComScoreMetadata comScoreMetadata = new ComScoreMetadataBuilder().setMediaType(ComScoreMediaType.LONG_FORM_ON_DEMAND).setPublisherBrandName("ABC").setProgramTitle("Modern Family").setEpisodeTitle("Rash Decisions").setEpisodeSeasonNumber("1").setEpisodeNumber("2").setContentGenre("Comedy").setStationTitle("Hulu").setCompleteEpisode(true).build();
+        ComScoreMetadata comScoreMetadata = new ComScoreMetadata.Builder(ComScoreMediaType.LONG_FORM_ON_DEMAND).setPublisherBrandName("ABC").setProgramTitle("Modern Family").setEpisodeTitle("Rash Decisions").setEpisodeSeasonNumber("1").setEpisodeNumber("2").setContentGenre("Comedy").setStationTitle("Hulu").setCompleteEpisode(true).build();
         comScoreStreamingAnalytics = new ComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);
     }
 
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == vodButton) {
             loadVod();
-        }else if (v == unloadButton){
+        } else if (v == unloadButton) {
             unload();
         }
     }

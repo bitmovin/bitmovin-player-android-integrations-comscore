@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ComScoreBitmovinAdapter {
-    public static final String TAG = "ComScoreBitmovinAdapter";
+    private static final String TAG = "ComScoreBitmovinAdapter";
 
     private BitmovinPlayer bitmovinPlayer;
     private Map<String, String> metadata;

@@ -19,7 +19,7 @@ And this line to your main project `build.gradle`
 
 ```
 dependencies {
-    compile 'com.bitmovin.player.integrations:comscoreanalytics:0.1.0'
+    implementation 'com.bitmovin.player.integrations:comscoreanalytics:0.1.0'
 }
 ```
 
@@ -40,7 +40,16 @@ Once you have created a video player, you can track it via the ComScoreStreaming
 ```java
 
 //Create metadata using the builder
-ComScoreMetadata comScoreMetadata = new ComScoreMetadataBuilder().setMediaType(ComScoreMediaType.LONG_FORM_ON_DEMAND).setPublisherBrandName("ABC").setProgramTitle("Modern Family").setEpisodeTitle("Rash Decisions").setEpisodeSeasonNumber("1").setEpisodeNumber("2").setContentGenre("Comedy").setStationTitle("Hulu").setCompleteEpisode(true).build();
+ComScoreMetadata comScoreMetadata = new ComScoreMetadataBuilder().setMediaType(ComScoreMediaType.LONG_FORM_ON_DEMAND)
+                                                                 .setPublisherBrandName("ABC")
+                                                                 .setProgramTitle("Modern Family")
+                                                                 .setEpisodeTitle("Rash Decisions")
+                                                                 .setEpisodeSeasonNumber("1")
+                                                                 .setEpisodeNumber("2")
+                                                                 .setContentGenre("Comedy")
+                                                                 .setStationTitle("Hulu")
+                                                                 .setCompleteEpisode(true)
+                                                                 .build();
 
 //Create ComScoreStreamingAnalytics 
 comScoreStreamingAnalytics = new ComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);

@@ -15,7 +15,9 @@ public class ComScoreAnalytics {
     public static void addConfiguration(ComScoreConfiguration configuration) {
         PublisherConfiguration myPublisherConfig = new PublisherConfiguration.Builder()
                 .publisherId(configuration.getPublisherId())
-                .publisherSecret(configuration.getPublisherSecret()).applicationName(configuration.getApplicationName()).build();
+                .publisherSecret(configuration.getPublisherSecret())
+                .applicationName(configuration.getApplicationName())
+                .build();
         Analytics.getConfiguration().addClient(myPublisherConfig);
     }
 

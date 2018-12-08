@@ -21,6 +21,6 @@
         </activity>
         <meta-data
             android:name="BITMOVIN_PLAYER_LICENSE_KEY"
-            android:value="18ca6ad5-9768-4129-bdf6-17685e0d14d2" />
+            android:value="YOUR_LICENSE_KEY" />
     </application>
 </manifest>
