@@ -31,8 +31,7 @@ How to setup ComScoreAnalytics for app lifecycle tracking. Do this once your app
 
 ```java
 ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR APPLICATION NAME");
-ComScoreAnalytics.addConfiguration(comScoreConfiguration);
-ComScoreAnalytics.start(getApplicationContext());
+ComScoreAnalytics.start(comScoreConfiguration, getApplicationContext());
 ```
 
 Once you have created a video player, you can track it via the ComScoreStreamingAnalytics object 
