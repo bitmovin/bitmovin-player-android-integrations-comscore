@@ -49,8 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         vodButton.setOnClickListener(this);
 
         ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR_APPLICATION_NAME");
-        ComScoreAnalytics.addConfiguration(comScoreConfiguration);
-        ComScoreAnalytics.start(getApplicationContext());
+        ComScoreAnalytics.start(comScoreConfiguration,getApplicationContext());
 
         // Create new StyleConfiguration
         StyleConfiguration styleConfiguration = new StyleConfiguration();
