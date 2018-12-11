@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class ComScoreBitmovinAdapter {
     private static final String TAG = "ComScoreBitmovinAdapter";
+    private static final String ASSET_DURATION_KEY = "ns_st_cl";
 
     private BitmovinPlayer bitmovinPlayer;
     private Map<String, String> metadata;
@@ -138,7 +139,7 @@ public class ComScoreBitmovinAdapter {
         } else {
             duration = duration * 1000;
         }
-        metadata.put("ns_st_cl", String.valueOf(duration));
+        metadata.put(ASSET_DURATION_KEY, String.valueOf(duration));
 
         if (comScoreState != ComScoreState.VIDEO) {
             if (comScoreState != ComScoreState.STOPPED) {
@@ -175,7 +176,7 @@ public class ComScoreBitmovinAdapter {
             }
 
             Map<String, String> adMap = new HashMap<>();
-            adMap.put("ns_st_cl", String.valueOf(duration * 1000));
+            adMap.put(ASSET_DURATION_KEY, String.valueOf(duration * 1000));
             Log.d(TAG, "ComScore Tracking Ad Play");
             streamingAnalytics.playAudioAdvertisement(adMap, adType);
         }

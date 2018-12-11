@@ -12,10 +12,10 @@ public class ComScoreAnalytics {
      * Starts the ComScoreAnalytics app level tracking
      *
      * @param configuration - ComScore configuration with your app publisher id, publisher secret, and application name
-     * @param context - Application Context
+     * @param context       - Application Context
      */
     public static synchronized void start(ComScoreConfiguration configuration, Context context) {
-        if(!started) {
+        if (!started) {
             PublisherConfiguration myPublisherConfig = new PublisherConfiguration.Builder()
                     .publisherId(configuration.getPublisherId())
                     .publisherSecret(configuration.getPublisherSecret())
