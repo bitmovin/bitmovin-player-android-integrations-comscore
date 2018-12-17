@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -31,12 +35,4 @@ dependencies {
     implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.8.7' // only needed if ads are used
     implementation "com.google.android.gms:play-services-ads:15.0.1" // only needed if ads are used
     implementation "com.android.support:support-v4:27.0.1" // only needed if ads are used
-}
-
-
-android {
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }

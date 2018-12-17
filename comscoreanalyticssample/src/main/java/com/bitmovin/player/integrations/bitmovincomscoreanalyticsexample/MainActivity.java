@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bitmovinPlayerView = findViewById(R.id.bitmovinPlayerView);
         vodButton.setOnClickListener(this);
 
-        ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR_APPLICATION_NAME");
-        ComScoreAnalytics.start(comScoreConfiguration,getApplicationContext());
+        ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "APPLICATION_NAME");
+        ComScoreAnalytics.start(comScoreConfiguration, getApplicationContext());
 
         // Create new StyleConfiguration
         StyleConfiguration styleConfiguration = new StyleConfiguration();
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bitmovinPlayerView.setPlayer(bitmovinPlayer);
 
         ComScoreMetadata comScoreMetadata = new ComScoreMetadata.Builder(ComScoreMediaType.LONG_FORM_ON_DEMAND).setPublisherBrandName("ABC").setProgramTitle("Modern Family").setEpisodeTitle("Rash Decisions").setEpisodeSeasonNumber("1").setEpisodeNumber("2").setContentGenre("Comedy").setStationTitle("Hulu").setCompleteEpisode(true).build();
-        comScoreStreamingAnalytics = new ComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);
+        comScoreStreamingAnalytics = ComScoreAnalytics.createComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);
     }
 
 

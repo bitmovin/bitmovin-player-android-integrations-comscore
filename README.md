@@ -51,7 +51,7 @@ ComScoreMetadata comScoreMetadata = new ComScoreMetadataBuilder().setMediaType(C
                                                                  .build();
 
 //Create ComScoreStreamingAnalytics 
-comScoreStreamingAnalytics = new ComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);
+comScoreStreamingAnalytics = new ComScoreAnalytics.createComScoreAnalytics(bitmovinPlayer, comScoreMetadata);
 
 // Load a source
 bitmovinPlayer.load(source)

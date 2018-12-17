@@ -1,11 +1,14 @@
 package com.bitmovin.player.integrations.comscoreanalytics;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.bitmovin.player.BitmovinPlayer;
 import com.comscore.Analytics;
 import com.comscore.PublisherConfiguration;
 
 public class ComScoreAnalytics {
+    private static final String TAG = "ComScoreAnalytics";
     private static boolean started;
 
     /**
@@ -25,6 +28,15 @@ public class ComScoreAnalytics {
 
             Analytics.start(context);
             started = true;
+        }
+    }
+
+    public static synchronized ComScoreStreamingAnalytics createComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
+        if (started) {
+            return new ComScoreStreamingAnalytics(bitmovinPlayer, metadata);
+        } else {
+            Log.e(TAG, "ComScoreStreamingAnalytics was not created. Must call start() first");
+            throw new ComScoreAnalyticsException("ComScoreStreamingAnalytics was not created. Must call start() first");
         }
     }
 }

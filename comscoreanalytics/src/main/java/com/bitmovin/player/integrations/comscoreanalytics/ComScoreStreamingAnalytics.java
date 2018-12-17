@@ -11,7 +11,7 @@ public class ComScoreStreamingAnalytics {
      * @param bitmovinPlayer - the video player you want to track
      * @param metadata       - ComScoreMetadata associated with the source you are going to load
      */
-    public ComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
+    ComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
         adapter = new ComScoreBitmovinAdapter(bitmovinPlayer, metadata);
     }
 

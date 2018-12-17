@@ -33,6 +33,8 @@ public class ComScoreBitmovinAdapter {
     private int contentType;
     private ReducedRequirementsStreamingAnalytics streamingAnalytics;
     private ComScoreState comScoreState = ComScoreState.STOPPED;
+    private double currentAdDuration;
+    private double currentAdOffset;
 
     public ComScoreBitmovinAdapter(BitmovinPlayer bitmovinPlayer, ComScoreMetadata comScoreMetadata) {
         this.bitmovinPlayer = bitmovinPlayer;
@@ -64,7 +66,11 @@ public class ComScoreBitmovinAdapter {
     private OnPlayingListener onPlayingListener = new OnPlayingListener() {
         @Override
         public void onPlaying(PlayingEvent playingEvent) {
-            transitionToVideoPlay();
+            if (bitmovinPlayer.isAd()) {
+                transitionToAd(currentAdDuration, currentAdOffset);
+            } else {
+                transitionToVideoPlay();
+            }
         }
     };
 
@@ -92,7 +98,9 @@ public class ComScoreBitmovinAdapter {
     private OnAdStartedListener onAdStartedListener = new OnAdStartedListener() {
         @Override
         public void onAdStarted(AdStartedEvent adStartedEvent) {
-            transitionToAd(bitmovinPlayer.getDuration(), adStartedEvent.getTimeOffset());
+            currentAdDuration = adStartedEvent.getDuration();
+            currentAdOffset = adStartedEvent.getTimeOffset();
+            transitionToAd(currentAdDuration, currentAdOffset);
         }
     };
 
