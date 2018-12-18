@@ -24,6 +24,9 @@ android {
 
 dependencies {
     implementation project(path: ':comscoreanalytics')
+
+//    implementation 'com.bitmovin.player.integrations:comscoreanalytics:0.9.0'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:27.0.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
