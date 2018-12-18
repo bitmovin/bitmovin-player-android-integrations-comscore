@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:drawable="@color/button_pressed">
+        <layout_margin
+            android:left="5dp"
+            android:top="5dp"
+            android:right="5dp"
+            android:bottom="5dp"
+            />
+        <padding
+            android:left="5dp"
+            android:top="5dp"
+            android:right="5dp"
+            android:bottom="5dp"
+            />
+    </item><!-- pressed -->
+    <item android:state_focused="true"
+        android:drawable="@color/button_focused"
+        android:layout_margin="2dp">
+        <padding
+            android:left="5dp"
+            android:top="5dp"
+            android:right="5dp"
+            android:bottom="5dp"
+            />
+    </item><!-- pressed --> <!-- focused -->
+    <item android:drawable="@color/button_default">
+        <margin
+            android:left="5dp"
+            android:top="5dp"
+            android:right="5dp"
+            android:bottom="5dp"
+            />
+        <padding
+            android:left="5dp"
+            android:top="5dp"
+            android:right="5dp"
+            android:bottom="5dp"
+            />
+    </item> <!-- default -->
+</selector>
