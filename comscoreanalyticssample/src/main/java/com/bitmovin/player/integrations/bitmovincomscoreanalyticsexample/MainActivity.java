@@ -92,8 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (bitmovinPlayer != null && !bitmovinPlayer.isAd()) {
+        if (bitmovinPlayerView != null) {
             this.bitmovinPlayerView.onResume();
         }
     }
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
-        if (bitmovinPlayer != null && !bitmovinPlayer.isAd()) {
+        if (bitmovinPlayerView != null) {
             this.bitmovinPlayerView.onPause();
         }
     }
