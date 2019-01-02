@@ -89,6 +89,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (bitmovinPlayerView != null) {
+            this.bitmovinPlayerView.onResume();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (bitmovinPlayerView != null) {
+            this.bitmovinPlayerView.onPause();
+        }
+    }
+
     private void loadLive() {
         SourceItem sourceItem = new SourceItem(new HLSSource("https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"));
         SourceConfiguration sourceConfig = new SourceConfiguration();
