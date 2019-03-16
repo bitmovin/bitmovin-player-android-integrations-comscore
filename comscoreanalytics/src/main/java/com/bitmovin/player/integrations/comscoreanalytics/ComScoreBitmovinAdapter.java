@@ -77,7 +77,9 @@ public class ComScoreBitmovinAdapter {
     private OnPausedListener onPausedListener = new OnPausedListener() {
         @Override
         public void onPaused(PausedEvent pausedEvent) {
-            stop();
+            if (!bitmovinPlayer.isAd()){
+                stop();
+            }
         }
     };
 
@@ -132,7 +134,7 @@ public class ComScoreBitmovinAdapter {
         }
     }
 
-    private void stop() {
+    private synchronized void stop() {
         if (comScoreState != ComScoreState.STOPPED) {
             Log.d(TAG, "Stopping ComScore Tracking");
             comScoreState = ComScoreState.STOPPED;
@@ -140,33 +142,26 @@ public class ComScoreBitmovinAdapter {
         }
     }
 
-    private void transitionToVideoPlay() {
+    private synchronized void transitionToVideoPlay() {
         double duration = bitmovinPlayer.getDuration();
         if (Double.isInfinite(duration)) {
             duration = 0;
         } else {
             duration = duration * 1000;
         }
-        metadata.put(ASSET_DURATION_KEY, String.valueOf(duration));
+        metadata.put(ASSET_DURATION_KEY, String.valueOf((int) duration));
 
         if (comScoreState != ComScoreState.VIDEO) {
-            if (comScoreState != ComScoreState.STOPPED) {
-                Log.d(TAG, "Stopping ComScore Tracking");
-                streamingAnalytics.stop();
-            }
+            stop();
             comScoreState = ComScoreState.VIDEO;
             Log.d(TAG, "ComScore Tracking Video Content");
             streamingAnalytics.playVideoContentPart(metadata, contentType);
         }
     }
 
-    private void transitionToAd(double duration, double offset) {
+    private synchronized void transitionToAd(double duration, double offset) {
         if (comScoreState != ComScoreState.ADVERTISEMENT) {
-            if (comScoreState != ComScoreState.STOPPED) {
-                Log.d(TAG, "Stopping ComScore Tracking");
-                streamingAnalytics.stop();
-            }
-
+            stop();
             comScoreState = ComScoreState.ADVERTISEMENT;
 
             int adType;
@@ -183,10 +178,12 @@ public class ComScoreBitmovinAdapter {
                 }
             }
 
+            duration = duration * 1000;
+
             Map<String, String> adMap = new HashMap<>();
-            adMap.put(ASSET_DURATION_KEY, String.valueOf(duration * 1000));
+            adMap.put(ASSET_DURATION_KEY, String.valueOf((int) duration));
             Log.d(TAG, "ComScore Tracking Ad Play");
-            streamingAnalytics.playAudioAdvertisement(adMap, adType);
+            streamingAnalytics.playVideoAdvertisement(adMap, adType);
         }
     }
 
