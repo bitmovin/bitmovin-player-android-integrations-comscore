@@ -1,4 +1,4 @@
-package com.bitmovin.player.integrations.comscoreanalytics;
+package com.bitmovin.player.integration.comscore;
 
 import android.content.Context;
 import android.util.Log;

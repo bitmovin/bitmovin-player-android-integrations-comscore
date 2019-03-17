@@ -1,1 +1,1 @@
-include ':comscoreanalyticssample', ':comscoreanalytics'
+include ':comscoresample', ':comscore'
