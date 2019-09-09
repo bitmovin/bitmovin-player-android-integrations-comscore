@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bitmovin.player.integrations.comscoreanalytics" />
+    package="com.bitmovin.player.integration.comscore" />

@@ -1,4 +1,4 @@
-package com.bitmovin.player.integrations.bitmovincomscoreanalyticsexample;
+package com.bitmovin.player.integration.ComScoreExample;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,11 +19,11 @@ import com.bitmovin.player.config.advertising.AdvertisingConfiguration;
 import com.bitmovin.player.config.media.HLSSource;
 import com.bitmovin.player.config.media.SourceConfiguration;
 import com.bitmovin.player.config.media.SourceItem;
-import com.bitmovin.player.integrations.comscoreanalytics.ComScoreAnalytics;
-import com.bitmovin.player.integrations.comscoreanalytics.ComScoreConfiguration;
-import com.bitmovin.player.integrations.comscoreanalytics.ComScoreMediaType;
-import com.bitmovin.player.integrations.comscoreanalytics.ComScoreMetadata;
-import com.bitmovin.player.integrations.comscoreanalytics.ComScoreStreamingAnalytics;
+import com.bitmovin.player.integration.comscore.ComScoreAnalytics;
+import com.bitmovin.player.integration.comscore.ComScoreConfiguration;
+import com.bitmovin.player.integration.comscore.ComScoreMediaType;
+import com.bitmovin.player.integration.comscore.ComScoreMetadata;
+import com.bitmovin.player.integration.comscore.ComScoreStreamingAnalytics;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, KeyEvent.Callback {
     // These are IMA Sample Tags from https://developers.google.com/interactive-media-ads/docs/sdks/android/tags

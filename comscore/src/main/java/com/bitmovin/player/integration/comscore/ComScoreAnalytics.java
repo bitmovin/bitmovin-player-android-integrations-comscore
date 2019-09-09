@@ -1,4 +1,4 @@
-package com.bitmovin.player.integrations.comscoreanalytics;
+package com.bitmovin.player.integration.comscore;
 
 import android.content.Context;
 import android.util.Log;
@@ -31,6 +31,12 @@ public class ComScoreAnalytics {
         }
     }
 
+    /**
+     * Creates ComScoreStreamingAnalytics object that is attached to your bitmovin player
+     * @param bitmovinPlayer - the player to report on
+     * @param metadata - ComScoreMetadata associated with the current loaded source
+     * @return ComScoreStreamingAnalytics object
+     */
     public static synchronized ComScoreStreamingAnalytics createComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
         if (started) {
             return new ComScoreStreamingAnalytics(bitmovinPlayer, metadata);
@@ -38,5 +44,14 @@ public class ComScoreAnalytics {
             Log.e(TAG, "ComScoreStreamingAnalytics was not created. Must call start() first");
             throw new ComScoreAnalyticsException("ComScoreStreamingAnalytics was not created. Must call start() first");
         }
+    }
+
+    /**
+     * Returns true if the ComScoreAnalytics object has been started. You must do this prior to creating ComScoreStreamingAnalytics
+     *
+     * @return
+     */
+    public static boolean isStarted() {
+        return started;
     }
 }
