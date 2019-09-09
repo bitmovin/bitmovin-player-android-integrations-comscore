@@ -1,4 +1,4 @@
-package com.bitmovin.player.integrations.comscoreanalytics;
+package com.bitmovin.player.integration.comscore;
 
 public class ComScoreAnalyticsException extends RuntimeException {
     private String message;
