@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bitmovin-player-android-integrations-comscore.iml" filepath="$PROJECT_DIR$/bitmovin-player-android-integrations-comscore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comscore/bitmovin-player-android-integrations-comscore-comscore.iml" filepath="$PROJECT_DIR$/comscore/bitmovin-player-android-integrations-comscore-comscore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/comscoresample/bitmovin-player-android-integrations-comscore-comscoresample.iml" filepath="$PROJECT_DIR$/comscoresample/bitmovin-player-android-integrations-comscore-comscoresample.iml" />
       <module fileurl="file://$PROJECT_DIR$/comscore/comscore.iml" filepath="$PROJECT_DIR$/comscore/comscore.iml" />
       <module fileurl="file://$PROJECT_DIR$/comscoresample/comscoresample.iml" filepath="$PROJECT_DIR$/comscoresample/comscoresample.iml" />
     </modules>
