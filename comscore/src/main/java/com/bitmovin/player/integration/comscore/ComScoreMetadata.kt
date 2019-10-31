@@ -21,7 +21,7 @@ class ComScoreMetadata(val mediaType: ComScoreMediaType) {
     var completeEpisode = false
     var feedType: String? = null
 
-    fun toDictionary(): MutableMap<String, String?> {
+    fun toMap(): MutableMap<String, String?> {
         val map = mutableMapOf(
             "ns_st_ci" to uniqueContentId,
             "ns_st_pu" to publisherBrandName,
