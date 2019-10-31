@@ -1,25 +1,26 @@
 package com.bitmovin.player.integration.comscore
 
-class ComScoreMetadata(val mediaType: ComScoreMediaType) {
-
-    var uniqueContentId: String? = null
-    var publisherBrandName: String? = null
-    var programTitle: String? = null
-    var programId: String? = null
-    var episodeTitle: String? = null
-    var episodeId: String? = null
-    var episodeSeasonNumber: String? = null
-    var episodeNumber: String? = null
-    var contentGenre: String? = null
-    var advertisementLoad = false
-    var digitalAirdate: String? = null
-    var tvAirdate: String? = null
-    var stationTitle: String? = null
-    var c3: String? = null
-    var c4: String? = null
-    var c6: String? = null
-    var completeEpisode = false
-    var feedType: String? = null
+class ComScoreMetadata(
+    val mediaType: ComScoreMediaType,
+    private var uniqueContentId: String? = null,
+    private var publisherBrandName: String? = null,
+    private var programTitle: String? = null,
+    private var programId: String? = null,
+    private var episodeTitle: String? = null,
+    private var episodeId: String? = null,
+    private var episodeSeasonNumber: String? = null,
+    private var episodeNumber: String? = null,
+    private var contentGenre: String? = null,
+    private var advertisementLoad: Boolean = false,
+    private var digitalAirdate: String? = null,
+    private var tvAirdate: String? = null,
+    private var stationTitle: String? = null,
+    private var c3: String? = null,
+    private var c4: String? = null,
+    private var c6: String? = null,
+    private var completeEpisode: Boolean = false,
+    private var feedType: String? = null
+) {
 
     fun toMap(): MutableMap<String, String?> {
         val map = mutableMapOf(

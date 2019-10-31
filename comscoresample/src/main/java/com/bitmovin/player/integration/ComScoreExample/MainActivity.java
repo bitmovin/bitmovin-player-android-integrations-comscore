@@ -84,16 +84,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bitmovinPlayer = new BitmovinPlayer(getApplicationContext(), playerConfiguration);
         bitmovinPlayerView.setPlayer(bitmovinPlayer);
 
-        ComScoreMetadata comScoreMetadata = new ComScoreMetadata(ComScoreMediaType.LONG_FORM_ON_DEMAND);
-        comScoreMetadata.setPublisherBrandName("ABC");
-        comScoreMetadata.setProgramTitle("Modern Family");
-        comScoreMetadata.setEpisodeTitle("Rash Decisions");
-        comScoreMetadata.setEpisodeSeasonNumber("1");
-        comScoreMetadata.setEpisodeNumber("2");
-        comScoreMetadata.setContentGenre("Comedy");
-        comScoreMetadata.setStationTitle("Hulu");
-        comScoreMetadata.setCompleteEpisode(true);
-        comScoreStreamingAnalytics = ComScoreAnalytics.INSTANCE.createComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);
+//        ComScoreMetadata comScoreMetadata = new ComScoreMetadata(ComScoreMediaType.LONG_FORM_ON_DEMAND);
+//        comScoreMetadata.setPublisherBrandName("ABC");
+//        comScoreMetadata.setProgramTitle("Modern Family");
+//        comScoreMetadata.setEpisodeTitle("Rash Decisions");
+//        comScoreMetadata.setEpisodeSeasonNumber("1");
+//        comScoreMetadata.setEpisodeNumber("2");
+//        comScoreMetadata.setContentGenre("Comedy");
+//        comScoreMetadata.setStationTitle("Hulu");
+//        comScoreMetadata.setCompleteEpisode(true);
+//        comScoreStreamingAnalytics = ComScoreAnalytics.INSTANCE.createComScoreStreamingAnalytics(bitmovinPlayer, comScoreMetadata);
     }
 
 
