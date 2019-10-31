@@ -18,6 +18,6 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, metadata: ComSc
      * @param metadata
      */
     fun updateMetadata(metadata: ComScoreMetadata) {
-        adapter.updateMetadata(metadata)
+        adapter.metadata = metadata
     }
 }
