@@ -38,7 +38,7 @@ public class ComScoreBitmovinAdapter {
 
     public ComScoreBitmovinAdapter(BitmovinPlayer bitmovinPlayer, ComScoreMetadata comScoreMetadata) {
         this.bitmovinPlayer = bitmovinPlayer;
-        metadata = comScoreMetadata.toDictionary();
+        metadata = comScoreMetadata.toMap();
         contentType = comScoreContentType(comScoreMetadata.getMediaType());
         this.streamingAnalytics = new ReducedRequirementsStreamingAnalytics();
 
@@ -52,7 +52,7 @@ public class ComScoreBitmovinAdapter {
     }
 
     public void updateMetadata(ComScoreMetadata metadata) {
-        this.metadata = metadata.toDictionary();
+        this.metadata = metadata.toMap();
         contentType = comScoreContentType(metadata.getMediaType());
     }
 
