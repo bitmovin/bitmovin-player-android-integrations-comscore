@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
             episodeTitle = "Rash Decisions",
             episodeSeasonNumber = "1",
             episodeNumber = "2",
-            contentGenre = "Comdey",
+            contentGenre = "Comedy",
             stationTitle = "Hulu",
             completeEpisode = true
         )
