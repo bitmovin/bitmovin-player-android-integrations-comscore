@@ -4,38 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:keepScreenOn="true">
+    android:keepScreenOn="true"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/vodButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="VOD"
+        app:layout_constraintBottom_toTopOf="@id/bitmovinPlayerView"
+        app:layout_constraintEnd_toStartOf="@id/unloadButton"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/unloadButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Unload"
+        app:layout_constraintBottom_toBottomOf="@id/vodButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/vodButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.bitmovin.player.BitmovinPlayerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:id="@+id/bitmovinPlayerView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-    </com.bitmovin.player.BitmovinPlayerView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <Button
-            android:id="@+id/vod_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="VOD"
-            android:background="@drawable/button_background"
-            android:enabled="true"
-            android:clickable="true"
-            />
-        <Button
-            android:id="@+id/unload_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_background"
-            android:text="Unload"
-            />
-    </LinearLayout>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/vodButton" />
 
 </android.support.constraint.ConstraintLayout>

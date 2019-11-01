@@ -1,6 +1,6 @@
-package com.bitmovin.player.integration.comscore;
+package com.bitmovin.player.integration.comscore
 
-public enum ComScoreMediaType {
+enum class ComScoreMediaType {
     LONG_FORM_ON_DEMAND,
     SHORT_FORM_ON_DEMAND,
     LIVE,
