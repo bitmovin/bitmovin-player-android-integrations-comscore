@@ -4,7 +4,7 @@ public class ComScoreConfiguration {
     private String publisherId;
     private String publisherSecret;
     private String applicationName;
-    private ComScoreUserConsent userConsent = ComScoreUserConsent.UNKOWN;
+    private ComScoreUserConsent userConsent = ComScoreUserConsent.UNKNOWN;
 
     public ComScoreConfiguration(String publisherId, String publisherSecret, String applicationName, ComScoreUserConsent userConsent) {
         this(publisherId, publisherSecret, applicationName);

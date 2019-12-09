@@ -60,12 +60,12 @@ public class ComScoreBitmovinAdapter {
         contentType = comScoreContentType(metadata.getMediaType());
     }
 
-    public void giveUserConsent() {
-        updateUserConsent(ComScoreUserConsent.YES);
+    public void userConsentGranted() {
+        updateUserConsent(ComScoreUserConsent.GRANTED);
     }
 
-    public void removeUserConsent() {
-        updateUserConsent(ComScoreUserConsent.NO);
+    public void userConsentDenied() {
+        updateUserConsent(ComScoreUserConsent.DENIED);
     }
 
     private void updateUserConsent(ComScoreUserConsent userConsent) {

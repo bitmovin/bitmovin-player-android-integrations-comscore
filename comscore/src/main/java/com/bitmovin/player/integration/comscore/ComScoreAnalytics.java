@@ -32,7 +32,7 @@ public class ComScoreAnalytics {
 
             ComScoreUserConsent userConsent = configuration.getUserConsent();
             // Only populate label if user consent is known
-            if (userConsent != ComScoreUserConsent.UNKOWN) {
+            if (userConsent != ComScoreUserConsent.UNKNOWN) {
                 Map<String, String> labels = new HashMap<>();
                 labels.put("cs_ucfr", userConsent.getValue());
                 builder.persistentLabels(labels);

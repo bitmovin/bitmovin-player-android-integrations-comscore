@@ -1,9 +1,9 @@
 package com.bitmovin.player.integration.comscore;
 
 public enum ComScoreUserConsent {
-    NO("0"),
-    YES("1"),
-    UNKOWN("-1");
+    DENIED("0"),
+    GRANTED("1"),
+    UNKNOWN("-1");
 
     private String value;
 

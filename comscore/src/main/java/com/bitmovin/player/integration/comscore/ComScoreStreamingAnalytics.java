@@ -25,11 +25,17 @@ public class ComScoreStreamingAnalytics {
         adapter.updateMetadata(metadata);
     }
 
-    public void giveUserConsent() {
-        adapter.giveUserConsent();
+    /**
+     * Update user consent value to granted
+     */
+    public void setUserConsentGranted() {
+        adapter.userConsentGranted();
     }
 
-    public void removeUserConsent() {
-        adapter.removeUserConsent();
+    /**
+     * Update user consent value to denied
+     */
+    public void setUserConsentDenied() {
+        adapter.userConsentDenied();
     }
 }
