@@ -13,6 +13,7 @@ import java.util.Map;
 public class ComScoreAnalytics {
     private static final String TAG = "ComScoreAnalytics";
     private static boolean started;
+    private static ComScoreConfiguration configuration;
 
     /**
      * Starts the ComScoreAnalytics app level tracking
@@ -22,6 +23,8 @@ public class ComScoreAnalytics {
      */
     public static synchronized void start(ComScoreConfiguration configuration, Context context) {
         if (!started) {
+            ComScoreAnalytics.configuration = configuration;
+
             PublisherConfiguration.Builder builder = new PublisherConfiguration.Builder()
                     .publisherId(configuration.getPublisherId())
                     .publisherSecret(configuration.getPublisherSecret())
@@ -52,7 +55,7 @@ public class ComScoreAnalytics {
      */
     public static synchronized ComScoreStreamingAnalytics createComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
         if (started) {
-            return new ComScoreStreamingAnalytics(bitmovinPlayer, metadata);
+            return new ComScoreStreamingAnalytics(bitmovinPlayer, ComScoreAnalytics.configuration, metadata);
         } else {
             Log.e(TAG, "ComScoreStreamingAnalytics was not created. Must call start() first");
             throw new ComScoreAnalyticsException("ComScoreStreamingAnalytics was not created. Must call start() first");
