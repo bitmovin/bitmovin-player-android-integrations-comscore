@@ -28,14 +28,14 @@ public class ComScoreStreamingAnalytics {
     /**
      * Update user consent value to granted
      */
-    public void setUserConsentGranted() {
+    public void userConsentGranted() {
         adapter.userConsentGranted();
     }
 
     /**
      * Update user consent value to denied
      */
-    public void setUserConsentDenied() {
+    public void userConsentDenied() {
         adapter.userConsentDenied();
     }
 }
