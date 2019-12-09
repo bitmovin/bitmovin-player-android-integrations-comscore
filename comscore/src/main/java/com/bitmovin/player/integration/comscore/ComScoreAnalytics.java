@@ -7,6 +7,9 @@ import com.bitmovin.player.BitmovinPlayer;
 import com.comscore.Analytics;
 import com.comscore.PublisherConfiguration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ComScoreAnalytics {
     private static final String TAG = "ComScoreAnalytics";
     private static boolean started;
@@ -19,11 +22,20 @@ public class ComScoreAnalytics {
      */
     public static synchronized void start(ComScoreConfiguration configuration, Context context) {
         if (!started) {
-            PublisherConfiguration myPublisherConfig = new PublisherConfiguration.Builder()
+            PublisherConfiguration.Builder builder = new PublisherConfiguration.Builder()
                     .publisherId(configuration.getPublisherId())
                     .publisherSecret(configuration.getPublisherSecret())
-                    .applicationName(configuration.getApplicationName())
-                    .build();
+                    .applicationName(configuration.getApplicationName());
+
+            ComScoreUserConsent userConsent = configuration.getUserConsent();
+            // Only populate label if user consent is known
+            if (userConsent != ComScoreUserConsent.UNKOWN) {
+                Map<String, String> labels = new HashMap<>();
+                labels.put("cs_ucfr", userConsent.getValue());
+                builder.persistentLabels(labels);
+            }
+
+            PublisherConfiguration myPublisherConfig = builder.build();
             Analytics.getConfiguration().addClient(myPublisherConfig);
 
             Analytics.start(context);
@@ -33,8 +45,9 @@ public class ComScoreAnalytics {
 
     /**
      * Creates ComScoreStreamingAnalytics object that is attached to your bitmovin player
+     *
      * @param bitmovinPlayer - the player to report on
-     * @param metadata - ComScoreMetadata associated with the current loaded source
+     * @param metadata       - ComScoreMetadata associated with the current loaded source
      * @return ComScoreStreamingAnalytics object
      */
     public static synchronized ComScoreStreamingAnalytics createComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
