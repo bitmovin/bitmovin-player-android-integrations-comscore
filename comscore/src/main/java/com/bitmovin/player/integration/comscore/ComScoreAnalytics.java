@@ -50,18 +50,22 @@ public class ComScoreAnalytics {
      * Sets the user consent to granted. Use after the ComScoreAnalytics object has been started
      */
     public static synchronized void userConsentGranted() {
-        PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(ComScoreAnalytics.configuration.getPublisherId());
-        publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.GRANTED.getValue());
-        Analytics.notifyHiddenEvent();
+        if (started) {
+            PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(ComScoreAnalytics.configuration.getPublisherId());
+            publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.GRANTED.getValue());
+            Analytics.notifyHiddenEvent();
+        }
     }
 
     /**
      * Sets the user consent to denied. Use after the ComScoreAnalytics object has been started
      */
     public static synchronized void userConsentDenied() {
-        PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(ComScoreAnalytics.configuration.getPublisherId());
-        publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.DENIED.getValue());
-        Analytics.notifyHiddenEvent();
+        if (started) {
+            PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(ComScoreAnalytics.configuration.getPublisherId());
+            publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.DENIED.getValue());
+            Analytics.notifyHiddenEvent();
+        }
     }
 
     /**
