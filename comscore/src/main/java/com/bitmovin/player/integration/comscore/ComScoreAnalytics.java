@@ -47,6 +47,17 @@ public class ComScoreAnalytics {
     }
 
     /**
+     * Updates the user consent
+     *
+     * @param configuration - The ComScoreConfiguration that contains your application specific information
+     */
+    public static synchronized void updateUserConsent(ComScoreConfiguration configuration) {
+        PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.getPublisherId());
+        publisherConfig.setPersistentLabel("cs_ucfr", configuration.getUserConsent().getValue());
+        Analytics.notifyHiddenEvent();
+    }
+
+    /**
      * Creates ComScoreStreamingAnalytics object that is attached to your bitmovin player
      *
      * @param bitmovinPlayer - the player to report on
