@@ -32,4 +32,8 @@ public class ComScoreConfiguration {
     public ComScoreUserConsent getUserConsent() {
         return userConsent;
     }
+
+    public void setUserConsent(ComScoreUserConsent userConsent) {
+        this.userConsent = userConsent;
+    }
 }

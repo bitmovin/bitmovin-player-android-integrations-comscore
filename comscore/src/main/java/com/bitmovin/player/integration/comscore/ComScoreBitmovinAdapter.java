@@ -69,6 +69,7 @@ public class ComScoreBitmovinAdapter {
     }
 
     private void updateUserConsent(ComScoreUserConsent userConsent) {
+        configuration.setUserConsent(userConsent);
         PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.getPublisherId());
         publisherConfig.setPersistentLabel("cs_ucfr", userConsent.getValue());
         Analytics.notifyHiddenEvent();
