@@ -34,7 +34,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.bitmovin.player:playercore:2.36+'
+    implementation 'com.bitmovin.player:playercore:2.16+'
     implementation 'com.comscore:android-analytics:5.+'
     implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.8.7' // only needed if ads are used
     implementation "com.google.android.gms:play-services-ads:17.2.0" // only needed if ads are used
