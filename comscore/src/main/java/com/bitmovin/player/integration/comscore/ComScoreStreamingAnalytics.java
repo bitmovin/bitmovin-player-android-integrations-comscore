@@ -9,10 +9,11 @@ public class ComScoreStreamingAnalytics {
      * ComScoreStreaming analytics measures video playback and reports back to ComScore.
      *
      * @param bitmovinPlayer - the video player you want to track
+     * @param configuration  - ComScoreConfiguration associated with the source you are going to load
      * @param metadata       - ComScoreMetadata associated with the source you are going to load
      */
-    ComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreMetadata metadata) {
-        adapter = new ComScoreBitmovinAdapter(bitmovinPlayer, metadata);
+    ComScoreStreamingAnalytics(BitmovinPlayer bitmovinPlayer, ComScoreConfiguration configuration, ComScoreMetadata metadata) {
+        adapter = new ComScoreBitmovinAdapter(bitmovinPlayer, configuration, metadata);
     }
 
     /**
@@ -22,5 +23,19 @@ public class ComScoreStreamingAnalytics {
      */
     public void updateMetadata(ComScoreMetadata metadata) {
         adapter.updateMetadata(metadata);
+    }
+
+    /**
+     * Sets the user consent value to granted
+     */
+    public void userConsentGranted() {
+        adapter.userConsentGranted();
+    }
+
+    /**
+     * Sets the user consent value to denied
+     */
+    public void userConsentDenied() {
+        adapter.userConsentDenied();
     }
 }

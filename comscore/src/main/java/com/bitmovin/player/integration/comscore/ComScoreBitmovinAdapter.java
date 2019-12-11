@@ -17,6 +17,8 @@ import com.bitmovin.player.api.event.listener.OnPausedListener;
 import com.bitmovin.player.api.event.listener.OnPlaybackFinishedListener;
 import com.bitmovin.player.api.event.listener.OnPlayingListener;
 import com.bitmovin.player.api.event.listener.OnSourceUnloadedListener;
+import com.comscore.Analytics;
+import com.comscore.PublisherConfiguration;
 import com.comscore.streaming.AdType;
 import com.comscore.streaming.ContentType;
 import com.comscore.streaming.ReducedRequirementsStreamingAnalytics;
@@ -29,6 +31,7 @@ public class ComScoreBitmovinAdapter {
     private static final String ASSET_DURATION_KEY = "ns_st_cl";
 
     private BitmovinPlayer bitmovinPlayer;
+    private ComScoreConfiguration configuration;
     private Map<String, String> metadata;
     private int contentType;
     private ReducedRequirementsStreamingAnalytics streamingAnalytics;
@@ -36,10 +39,11 @@ public class ComScoreBitmovinAdapter {
     private double currentAdDuration;
     private double currentAdOffset;
 
-    public ComScoreBitmovinAdapter(BitmovinPlayer bitmovinPlayer, ComScoreMetadata comScoreMetadata) {
+    public ComScoreBitmovinAdapter(BitmovinPlayer bitmovinPlayer, ComScoreConfiguration comScoreConfiguration, ComScoreMetadata comScoreMetadata) {
         this.bitmovinPlayer = bitmovinPlayer;
-        metadata = comScoreMetadata.toDictionary();
-        contentType = comScoreContentType(comScoreMetadata.getMediaType());
+        this.configuration = comScoreConfiguration;
+        this.metadata = comScoreMetadata.toDictionary();
+        this.contentType = comScoreContentType(comScoreMetadata.getMediaType());
         this.streamingAnalytics = new ReducedRequirementsStreamingAnalytics();
 
         this.bitmovinPlayer.addEventListener(onPlaybackFinishedListener);
@@ -54,6 +58,21 @@ public class ComScoreBitmovinAdapter {
     public void updateMetadata(ComScoreMetadata metadata) {
         this.metadata = metadata.toDictionary();
         contentType = comScoreContentType(metadata.getMediaType());
+    }
+
+    public void userConsentGranted() {
+        updateUserConsent(ComScoreUserConsent.GRANTED);
+    }
+
+    public void userConsentDenied() {
+        updateUserConsent(ComScoreUserConsent.DENIED);
+    }
+
+    private void updateUserConsent(ComScoreUserConsent userConsent) {
+        configuration.setUserConsent(userConsent);
+        PublisherConfiguration publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.getPublisherId());
+        publisherConfig.setPersistentLabel("cs_ucfr", userConsent.getValue());
+        Analytics.notifyHiddenEvent();
     }
 
     private OnPlaybackFinishedListener onPlaybackFinishedListener = new OnPlaybackFinishedListener() {
@@ -77,7 +96,7 @@ public class ComScoreBitmovinAdapter {
     private OnPausedListener onPausedListener = new OnPausedListener() {
         @Override
         public void onPaused(PausedEvent pausedEvent) {
-            if (!bitmovinPlayer.isAd()){
+            if (!bitmovinPlayer.isAd()) {
                 stop();
             }
         }

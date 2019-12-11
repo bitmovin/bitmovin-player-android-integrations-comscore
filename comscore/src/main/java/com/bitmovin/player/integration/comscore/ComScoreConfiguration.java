@@ -4,6 +4,12 @@ public class ComScoreConfiguration {
     private String publisherId;
     private String publisherSecret;
     private String applicationName;
+    private ComScoreUserConsent userConsent = ComScoreUserConsent.UNKNOWN;
+
+    public ComScoreConfiguration(String publisherId, String publisherSecret, String applicationName, ComScoreUserConsent userConsent) {
+        this(publisherId, publisherSecret, applicationName);
+        this.userConsent = userConsent;
+    }
 
     public ComScoreConfiguration(String publisherId, String publisherSecret, String applicationName) {
         this.publisherId = publisherId;
@@ -23,4 +29,11 @@ public class ComScoreConfiguration {
         return applicationName;
     }
 
+    public ComScoreUserConsent getUserConsent() {
+        return userConsent;
+    }
+
+    public void setUserConsent(ComScoreUserConsent userConsent) {
+        this.userConsent = userConsent;
+    }
 }
