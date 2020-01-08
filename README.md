@@ -19,7 +19,7 @@ And this line to your main project `build.gradle`
 
 ```
 dependencies {
-    implementation 'com.bitmovin.player.integrations:comscoreanalytics:1.1.1'
+    implementation 'com.bitmovin.player.integrations:comscoreanalytics:1.2.1'
 }
 ```
 
@@ -30,7 +30,7 @@ dependencies {
 How to setup ComScoreAnalytics for app lifecycle tracking. Do this once your application loads
 
 ```java
-ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR APPLICATION NAME");
+ComScoreConfiguration comScoreConfiguration = new ComScoreConfiguration("YOUR_PUBLISHER_ID", "YOUR_PUBLISHER_SECRET", "YOUR APPLICATION NAME", true);
 ComScoreAnalytics.start(comScoreConfiguration, getApplicationContext());
 ```
 

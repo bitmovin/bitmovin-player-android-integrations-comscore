@@ -28,6 +28,7 @@ public class ComScoreAnalytics {
             PublisherConfiguration.Builder builder = new PublisherConfiguration.Builder()
                     .publisherId(configuration.getPublisherId())
                     .publisherSecret(configuration.getPublisherSecret())
+                    .secureTransmission(configuration.isSecureTransmissionEnabled())
                     .applicationName(configuration.getApplicationName());
 
             ComScoreUserConsent userConsent = configuration.getUserConsent();
