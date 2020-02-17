@@ -22,7 +22,7 @@ class ComScoreMetadata(
     private val feedType: String? = null
 ) {
 
-    fun toDictionary(): Map<String, String?> = mutableMapOf(
+    fun toMap(): Map<String, String?> = mutableMapOf(
         "ns_st_ci" to uniqueContentId,
         "ns_st_pu" to publisherBrandName,
         "ns_st_pr" to programTitle,
