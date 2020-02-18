@@ -46,5 +46,5 @@ class ComScoreMetadata(
         if (advertisementLoad) {
             put("ns_st_ia", "1")
         }
-    }.toMap()
+    }
 }
