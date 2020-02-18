@@ -1,4 +1,4 @@
-package com.bitmovin.player.integration.ComScoreExample
+package com.bitmovin.player.integration.comscoresample
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
