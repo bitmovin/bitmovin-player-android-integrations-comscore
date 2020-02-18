@@ -21,7 +21,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
         VIDEO
     }
 
-    private var metadataMap = mutableMapOf<String, String?>()
+    private var metadataMap = comScoreMetadata.toMap().toMutableMap()
     private val streamingAnalytics = ReducedRequirementsStreamingAnalytics()
     private var comScoreState = ComScoreState.STOPPED
     private var currentAdDuration = 0.0
