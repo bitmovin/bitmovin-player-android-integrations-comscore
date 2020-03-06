@@ -1,6 +1,6 @@
 package com.bitmovin.player.integration.comscore
 
-class ComScoreMetadata(
+data class ComScoreMetadata(
     val mediaType: ComScoreMediaType,
     private val uniqueContentId: String? = null,
     private val publisherBrandName: String? = null,

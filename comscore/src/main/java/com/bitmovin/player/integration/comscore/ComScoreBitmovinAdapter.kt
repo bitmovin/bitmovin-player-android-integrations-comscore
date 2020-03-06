@@ -41,43 +41,48 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
         addEventListeners()
     }
 
-    private fun addEventListeners() {
-        with(bitmovinPlayer) {
-            addEventListener(OnPlaybackFinishedListener {
-                stop()
-            })
-            addEventListener(OnPlayingListener {
-                if (bitmovinPlayer.isAd) {
-                    transitionToAd(currentAdDuration, currentAdOffset)
-                } else {
-                    transitionToVideoPlay()
-                }
-            })
-            addEventListener(OnPausedListener {
-                if (!bitmovinPlayer.isAd) {
-                    stop()
-                }
-            })
-            addEventListener(OnPausedListener {
-                if (!bitmovinPlayer.isAd) {
-                    stop()
-                }
-            })
-            addEventListener(OnErrorListener {
-                stop()
-            })
-            addEventListener(OnSourceUnloadedListener {
-                stop()
-            })
-            addEventListener(OnAdStartedListener {
-                currentAdDuration = it.duration
-                currentAdOffset = it.timeOffset
+    private fun addEventListeners() = with(bitmovinPlayer) {
+        addEventListener(OnPlaybackFinishedListener {
+            stop()
+        })
+
+        addEventListener(OnPlayingListener {
+            if (bitmovinPlayer.isAd) {
                 transitionToAd(currentAdDuration, currentAdOffset)
-            })
-            addEventListener(OnAdFinishedListener {
+            } else {
                 transitionToVideoPlay()
-            })
-        }
+            }
+        })
+
+        addEventListener(OnPausedListener {
+            if (!bitmovinPlayer.isAd) {
+                stop()
+            }
+        })
+
+        addEventListener(OnPausedListener {
+            if (!bitmovinPlayer.isAd) {
+                stop()
+            }
+        })
+
+        addEventListener(OnErrorListener {
+            stop()
+        })
+
+        addEventListener(OnSourceUnloadedListener {
+            stop()
+        })
+
+        addEventListener(OnAdStartedListener {
+            currentAdDuration = it.duration
+            currentAdOffset = it.timeOffset
+            transitionToAd(currentAdDuration, currentAdOffset)
+        })
+
+        addEventListener(OnAdFinishedListener {
+            transitionToVideoPlay()
+        })
     }
 
     @Synchronized
