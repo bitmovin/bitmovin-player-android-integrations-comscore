@@ -20,20 +20,20 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
      * @param metadata
      */
     fun updateMetadata(metadata: ComScoreMetadata) {
-        adapter.updateMetadata(metadata)
+        adapter.metadata = metadata
     }
 
     /**
      * Sets the user consent value to granted
      */
     fun userConsentGranted() {
-        adapter.userConsentGranted()
+        adapter.userConsent = ComScoreUserConsent.GRANTED
     }
 
     /**
      * Sets the user consent value to denied
      */
     fun userConsentDenied() {
-        adapter.userConsentDenied()
+        adapter.userConsent = ComScoreUserConsent.DENIED
     }
 }
