@@ -4,6 +4,6 @@ data class ComScoreConfiguration(
     val publisherId: String,
     val publisherSecret: String,
     val applicationName: String,
-    val userConsent: ComScoreUserConsent = ComScoreUserConsent.UNKNOWN,
+    var userConsent: ComScoreUserConsent = ComScoreUserConsent.UNKNOWN,
     val isSecureTransmissionEnabled: Boolean = false
 )
