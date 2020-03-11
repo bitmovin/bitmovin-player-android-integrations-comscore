@@ -11,7 +11,6 @@ import kotlin.properties.Delegates
 
 class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, configuration: ComScoreConfiguration, comScoreMetadata: ComScoreMetadata) {
     companion object {
-        private const val TAG = "ComScoreBitmovinAdapter"
         private const val ASSET_DURATION_KEY = "ns_st_cl"
     }
 
@@ -88,7 +87,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
     @Synchronized
     private fun stop() {
         if (comScoreState != ComScoreState.STOPPED) {
-            Log.d(TAG, "Stopping ComScore Tracking")
+            BitLog.d("Stopping ComScore tracking")
             comScoreState = ComScoreState.STOPPED
             streamingAnalytics.stop()
         }
@@ -106,7 +105,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
         if (comScoreState != ComScoreState.VIDEO) {
             stop()
             comScoreState = ComScoreState.VIDEO
-            Log.d(TAG, "ComScore Tracking Video Content")
+            BitLog.d("Starting ComScore video content tracking")
             streamingAnalytics.playVideoContentPart(metadataMap, metadata.mediaType.contentType())
         }
     }
@@ -124,7 +123,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
             }
             val durationValue = (duration * 1000).toInt().toString()
             val adMap = mapOf(ASSET_DURATION_KEY to durationValue)
-            Log.d(TAG, "ComScore Tracking Ad Play")
+            BitLog.d("Starting ComScore ad play tracking")
             streamingAnalytics.playVideoAdvertisement(adMap, adType)
         }
     }

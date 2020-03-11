@@ -8,7 +8,6 @@ import com.comscore.Analytics
 import com.comscore.PublisherConfiguration
 
 object ComScoreAnalytics {
-    private const val TAG = "ComScoreAnalytics"
     /**
      * Returns true if the ComScoreAnalytics object has been started. You must do this prior to creating ComScoreStreamingAnalytics
      *
@@ -58,6 +57,7 @@ object ComScoreAnalytics {
             val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
             publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.GRANTED.value)
             Analytics.notifyHiddenEvent()
+            BitLog.d("ComScore user consent granted")
         }
     }
 
@@ -70,6 +70,7 @@ object ComScoreAnalytics {
             val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
             publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.DENIED.value)
             Analytics.notifyHiddenEvent()
+            BitLog.d("ComScore user consent denied")
         }
     }
 
@@ -85,7 +86,7 @@ object ComScoreAnalytics {
         if (isStarted) {
             return ComScoreStreamingAnalytics(bitmovinPlayer, configuration, metadata)
         } else {
-            Log.e(TAG, "ComScoreStreamingAnalytics was not created. Must call start() first")
+            BitLog.e("ComScoreStreamingAnalytics was not created. Must call start() first")
             throw ComScoreAnalyticsException("ComScoreStreamingAnalytics was not created. Must call start() first")
         }
     }
