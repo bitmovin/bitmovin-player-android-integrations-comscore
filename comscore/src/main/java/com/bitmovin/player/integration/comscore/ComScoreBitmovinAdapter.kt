@@ -1,6 +1,5 @@
 package com.bitmovin.player.integration.comscore
 
-import android.util.Log
 import com.bitmovin.player.BitmovinPlayer
 import com.bitmovin.player.api.event.listener.*
 import com.bitmovin.player.integration.comscore.util.contentType
@@ -37,6 +36,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
     }
 
     init {
+        BitLog.isEnabled = configuration.isDebug
         addEventListeners()
     }
 

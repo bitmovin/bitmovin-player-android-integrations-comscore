@@ -6,9 +6,5 @@ data class ComScoreConfiguration(
     val applicationName: String,
     var userConsent: ComScoreUserConsent = ComScoreUserConsent.UNKNOWN,
     val isSecureTransmissionEnabled: Boolean = false,
-    var isDebug: Boolean = false
-) {
-    init {
-        BitLog.isEnabled = isDebug
-    }
-}
+    val isDebug: Boolean = false
+)
