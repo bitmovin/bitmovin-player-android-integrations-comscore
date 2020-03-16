@@ -13,7 +13,7 @@ object ComScoreAnalytics {
      *
      * @return
      */
-    private var isStarted: Boolean = false
+    var isStarted: Boolean = false
     private lateinit var configuration: ComScoreConfiguration
 
     /**
