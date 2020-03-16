@@ -26,22 +26,17 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':comscore')
-//    implementation 'com.bitmovin.player.integration:comscore:1.2.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation project(path: ':comscore')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation supportDependencies.appCompat
+    implementation supportDependencies.constraintLayout
+    implementation bitmovinPlayerDependencies.bitmovinPlayer
+    implementation comscoreDependencies.comscoreSDK
 
-    implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
-    implementation 'com.bitmovin.player:playercore:2.16+'
-    implementation 'com.comscore:android-analytics:5.+'
-    implementation 'com.google.ads.interactivemedia.v3:interactivemedia:3.8.7' // only needed if ads are used
-    implementation "com.google.android.gms:play-services-ads:17.2.0" // only needed if ads are used
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0' // only needed if ads are used
+    // only needed if ads are used
+    implementation adDependencies.imaSDK
+    implementation adDependencies.googlePlayServices
+    implementation adDependencies.androidLegacySupport
 }
