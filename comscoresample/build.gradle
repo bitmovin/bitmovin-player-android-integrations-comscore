@@ -8,8 +8,8 @@ android {
         applicationId "com.bitmovin.player.integration.bitmovincomscoreanalyticsexample"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 3
-        versionName "1.2.1"
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled true
     }
     buildTypes {
