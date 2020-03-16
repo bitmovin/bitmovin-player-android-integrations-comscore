@@ -37,6 +37,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
 
     init {
         BitLog.isEnabled = configuration.isDebug
+        BitLog.d("Version 1.2.2")
         addEventListeners()
     }
 
