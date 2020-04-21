@@ -8,19 +8,15 @@ import com.comscore.Analytics
 import com.comscore.PublisherConfiguration
 
 object ComScoreAnalytics {
-    /**
-     * Returns true if the ComScoreAnalytics object has been started. You must do this prior to creating ComScoreStreamingAnalytics
-     *
-     * @return
-     */
+
     var isStarted: Boolean = false
     private lateinit var configuration: ComScoreConfiguration
 
     /**
-     * Starts the ComScoreAnalytics app level tracking
+     * Start [ComScoreAnalytics] app level tracking
      *
-     * @param configuration - ComScore configuration with your app publisher id, publisher secret, and application name
-     * @param context       - Application Context
+     * @param configuration - [ComScoreConfiguration] with app publisher id, publisher secret, and application name
+     * @param context       - Application context
      */
     @Synchronized
     fun start(configuration: ComScoreConfiguration, context: Context) {
@@ -49,8 +45,10 @@ object ComScoreAnalytics {
     }
 
     /**
-     * Sets the user consent to granted. Use after the ComScoreAnalytics object has been started
+     * Set user consent to [ComScoreUserConsent.GRANTED]
+     *
      */
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabels(\"labelName\" to \"labelValue\")"))
     @Synchronized
     fun userConsentGranted() {
         if (isStarted) {
@@ -62,8 +60,10 @@ object ComScoreAnalytics {
     }
 
     /**
-     * Sets the user consent to denied. Use after the ComScoreAnalytics object has been started
+     * Set user consent to [ComScoreUserConsent.DENIED]
+     *
      */
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabels(\"labelName\" to \"labelValue\")"))
     @Synchronized
     fun userConsentDenied() {
         if (isStarted) {
@@ -75,11 +75,26 @@ object ComScoreAnalytics {
     }
 
     /**
-     * Creates ComScoreStreamingAnalytics object that is attached to your bitmovin player
+     * Apply ComScore persistent labels
      *
-     * @param bitmovinPlayer - the player to report on
-     * @param metadata       - ComScoreMetadata associated with the current loaded source
-     * @return ComScoreStreamingAnalytics object
+     * @param labels - the labels to apply
+     */
+    @Synchronized
+    fun applyPersistentLabel(vararg labels: Pair<String, String>) {
+        if (isStarted) {
+            val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
+            labels.forEach { publisherConfig.setPersistentLabel(it.first, it.second) }
+            Analytics.notifyHiddenEvent()
+            BitLog.d("ComScore persistent labels applied: ${labels.joinToString { "${it.first}:${it.second}" }}")
+        }
+    }
+
+    /**
+     * Create [ComScoreStreamingAnalytics] object
+     *
+     * @param bitmovinPlayer - the [BitmovinPlayer] to report on
+     * @param metadata       - [ComScoreMetadata] associated with the current loaded source
+     * @return [ComScoreStreamingAnalytics] object
      */
     @Synchronized
     fun createComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, metadata: ComScoreMetadata): ComScoreStreamingAnalytics {
