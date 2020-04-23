@@ -84,7 +84,7 @@ object ComScoreAnalytics {
     /**
      * Set a persistent label on the ComScore [PublisherConfiguration]
      *
-     * @param label - the label to apply
+     * @param label - the label to set
      */
     @Synchronized
     fun setPersistentLabel(label: Pair<String, String>) {

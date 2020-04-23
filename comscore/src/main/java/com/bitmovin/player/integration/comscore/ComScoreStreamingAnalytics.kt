@@ -1,6 +1,7 @@
 package com.bitmovin.player.integration.comscore
 
 import com.bitmovin.player.BitmovinPlayer
+import com.comscore.PublisherConfiguration
 
 /**
  * ComScoreStreaming analytics measures video playback and reports back to ComScore.
@@ -41,16 +42,16 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
     }
 
     /**
-     * Apply ComScore persistent label
+     * Set a persistent label on the ComScore [PublisherConfiguration]
      *
-     * @param label - the label to apply
+     * @param label - the label to set
      */
     fun setPersistentLabel(label: Pair<String, String>) = adapter.setPersistentLabel(label)
 
     /**
-     * Apply ComScore persistent label
+     * Set persistent labels on the ComScore [PublisherConfiguration]
      *
-     * @param label - the label to apply
+     * @param labels - the labels to set
      */
     fun setPersistentLabels(labels: List<Pair<String, String>>) = adapter.setPersistentLabels(labels)
 }
