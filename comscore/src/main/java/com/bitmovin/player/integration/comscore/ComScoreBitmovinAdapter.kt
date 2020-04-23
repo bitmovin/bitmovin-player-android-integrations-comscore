@@ -8,7 +8,7 @@ import com.comscore.streaming.AdType
 import com.comscore.streaming.ReducedRequirementsStreamingAnalytics
 import kotlin.properties.Delegates
 
-class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, configuration: ComScoreConfiguration, comScoreMetadata: ComScoreMetadata) {
+class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, private val configuration: ComScoreConfiguration, comScoreMetadata: ComScoreMetadata) {
     companion object {
         private const val ASSET_DURATION_KEY = "ns_st_cl"
     }
@@ -29,6 +29,8 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
         metadataMap.clear()
         metadataMap.putAll(newMetadata.toMap())
     }
+
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabel(\"labelName\" to \"labelValue\")"))
     var userConsent: ComScoreUserConsent by Delegates.observable(configuration.userConsent) { _, _, newUserConsent ->
         configuration.userConsent = newUserConsent
         Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId).setPersistentLabel("cs_ucfr", newUserConsent.value)
@@ -127,5 +129,11 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
             BitLog.d("Starting ComScore ad play tracking")
             streamingAnalytics.playVideoAdvertisement(adMap, adType)
         }
+    }
+
+    fun applyPersistentLabel(vararg labels: Pair<String, String>) {
+        val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
+        labels.forEach { publisherConfig.setPersistentLabel(it.first, it.second) }
+        Analytics.notifyHiddenEvent()
     }
 }
