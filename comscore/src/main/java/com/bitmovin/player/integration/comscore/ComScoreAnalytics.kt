@@ -63,7 +63,7 @@ object ComScoreAnalytics {
      * Set user consent to [ComScoreUserConsent.DENIED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabels(\"labelName\" to \"labelValue\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabel(\"label\" to \"value\")"))
     @Synchronized
     fun userConsentDenied() {
         if (isStarted) {
@@ -80,12 +80,20 @@ object ComScoreAnalytics {
      * @param labels - the labels to apply
      */
     @Synchronized
-    fun applyPersistentLabel(vararg labels: Pair<String, String>) {
+    fun applyPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { applyPersistentLabel(it) }
+
+    /**
+     * Apply a ComScore persistent label
+     *
+     * @param label - the label to apply
+     */
+    @Synchronized
+    fun applyPersistentLabel(label: Pair<String, String>) {
         if (isStarted) {
             val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
-            labels.forEach { publisherConfig.setPersistentLabel(it.first, it.second) }
+            publisherConfig.setPersistentLabel(label.first, label.second)
             Analytics.notifyHiddenEvent()
-            BitLog.d("ComScore persistent labels applied: ${labels.joinToString { "${it.first}:${it.second}" }}")
+            BitLog.d("ComScore persistent label applied: [${label.first}:${label.second}")
         }
     }
 
