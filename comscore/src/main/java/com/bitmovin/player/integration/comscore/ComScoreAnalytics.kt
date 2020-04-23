@@ -1,7 +1,6 @@
 package com.bitmovin.player.integration.comscore
 
 import android.content.Context
-import android.util.Log
 
 import com.bitmovin.player.BitmovinPlayer
 import com.comscore.Analytics
@@ -48,7 +47,7 @@ object ComScoreAnalytics {
      * Set user consent to [ComScoreUserConsent.GRANTED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabels(\"labelName\" to \"labelValue\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     @Synchronized
     fun userConsentGranted() {
         if (isStarted) {
@@ -63,7 +62,7 @@ object ComScoreAnalytics {
      * Set user consent to [ComScoreUserConsent.DENIED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabel(\"label\" to \"value\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     @Synchronized
     fun userConsentDenied() {
         if (isStarted) {
@@ -75,20 +74,20 @@ object ComScoreAnalytics {
     }
 
     /**
-     * Apply ComScore persistent labels
+     * Set persistent labels on the ComScore [PublisherConfiguration]
      *
-     * @param labels - the labels to apply
+     * @param labels - the labels to set
      */
     @Synchronized
-    fun applyPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { applyPersistentLabel(it) }
+    fun setPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { setPersistentLabel(it) }
 
     /**
-     * Apply a ComScore persistent label
+     * Set a persistent label on the ComScore [PublisherConfiguration]
      *
      * @param label - the label to apply
      */
     @Synchronized
-    fun applyPersistentLabel(label: Pair<String, String>) {
+    fun setPersistentLabel(label: Pair<String, String>) {
         if (isStarted) {
             val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
             publisherConfig.setPersistentLabel(label.first, label.second)

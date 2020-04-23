@@ -26,7 +26,7 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
      * Set user consent to [ComScoreUserConsent.GRANTED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabel(\"label\" to \"value\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     fun userConsentGranted() {
         adapter.userConsent = ComScoreUserConsent.GRANTED
     }
@@ -35,7 +35,7 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
      * Set user consent to [ComScoreUserConsent.DENIED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabel(\"label\" to \"value\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     fun userConsentDenied() {
         adapter.userConsent = ComScoreUserConsent.DENIED
     }
@@ -45,12 +45,12 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
      *
      * @param label - the label to apply
      */
-    fun applyPersistentLabel(label: Pair<String, String>) = adapter.applyPersistentLabel(label)
+    fun setPersistentLabel(label: Pair<String, String>) = adapter.setPersistentLabel(label)
 
     /**
      * Apply ComScore persistent label
      *
      * @param label - the label to apply
      */
-    fun applyPersistentLabels(labels: List<Pair<String, String>>) = adapter.applyPersistentLabels(labels)
+    fun setPersistentLabels(labels: List<Pair<String, String>>) = adapter.setPersistentLabels(labels)
 }

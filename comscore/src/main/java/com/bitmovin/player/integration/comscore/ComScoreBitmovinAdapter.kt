@@ -30,7 +30,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
         metadataMap.putAll(newMetadata.toMap())
     }
 
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("applyPersistentLabel(\"label\" to \"value\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     var userConsent: ComScoreUserConsent by Delegates.observable(configuration.userConsent) { _, _, newUserConsent ->
         configuration.userConsent = newUserConsent
         Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId).setPersistentLabel("cs_ucfr", newUserConsent.value)
@@ -131,11 +131,11 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
         }
     }
 
-    fun applyPersistentLabel(label: Pair<String, String>) {
+    fun setPersistentLabel(label: Pair<String, String>) {
         val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
         publisherConfig.setPersistentLabel(label.first, label.second)
         Analytics.notifyHiddenEvent()
     }
 
-    fun applyPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { applyPersistentLabel(it) }
+    fun setPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { setPersistentLabel(it) }
 }
