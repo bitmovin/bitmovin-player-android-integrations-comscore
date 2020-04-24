@@ -53,5 +53,5 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
      *
      * @param labels - the labels to set
      */
-    fun setPersistentLabels(labels: List<Pair<String, String>>) = adapter.setPersistentLabels(labels)
+    fun setPersistentLabels(labels: Map<String, String>) = adapter.setPersistentLabels(labels)
 }

@@ -79,7 +79,16 @@ object ComScoreAnalytics {
      * @param labels - the labels to set
      */
     @Synchronized
-    fun setPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { setPersistentLabel(it) }
+    fun setPersistentLabels(labels: Map<String, String>) {
+        if (isStarted) {
+            val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
+            labels.forEach {
+                publisherConfig.setPersistentLabel(it.key, it.value)
+            }
+            Analytics.notifyHiddenEvent(labels)
+            BitLog.d("ComScore persistent labels set: ${labels.map { "${it.key}:${it.value}" }}")
+        }
+    }
 
     /**
      * Set a persistent label on the ComScore [PublisherConfiguration]
@@ -92,7 +101,7 @@ object ComScoreAnalytics {
             val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
             publisherConfig.setPersistentLabel(label.first, label.second)
             Analytics.notifyHiddenEvent()
-            BitLog.d("ComScore persistent label applied: [${label.first}:${label.second}")
+            BitLog.d("ComScore persistent label set: [${label.first}:${label.second}]")
         }
     }
 

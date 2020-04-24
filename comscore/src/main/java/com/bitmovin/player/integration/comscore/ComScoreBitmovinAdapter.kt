@@ -33,8 +33,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
     @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     var userConsent: ComScoreUserConsent by Delegates.observable(configuration.userConsent) { _, _, newUserConsent ->
         configuration.userConsent = newUserConsent
-        Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId).setPersistentLabel("cs_ucfr", newUserConsent.value)
-        Analytics.notifyHiddenEvent()
+        setPersistentLabel("cs_ucfr" to newUserConsent.value)
     }
 
     init {
@@ -135,7 +134,15 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
         val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
         publisherConfig.setPersistentLabel(label.first, label.second)
         Analytics.notifyHiddenEvent()
+        BitLog.d("ComScore persistent label set: [${label.first}:${label.second}]")
     }
 
-    fun setPersistentLabels(labels: List<Pair<String, String>>) = labels.forEach { setPersistentLabel(it) }
+    fun setPersistentLabels(labels: Map<String, String>)  {
+        val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
+        labels.forEach {
+            publisherConfig.setPersistentLabel(it.key, it.value)
+        }
+        Analytics.notifyHiddenEvent(labels)
+        BitLog.d("ComScore persistent labels set: ${labels.map { "${it.key}:${it.value}" }}")
+    }
 }
