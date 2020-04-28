@@ -8,7 +8,7 @@ import com.comscore.streaming.AdType
 import com.comscore.streaming.ReducedRequirementsStreamingAnalytics
 import kotlin.properties.Delegates
 
-class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, configuration: ComScoreConfiguration, comScoreMetadata: ComScoreMetadata) {
+class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, private val configuration: ComScoreConfiguration, comScoreMetadata: ComScoreMetadata) {
     companion object {
         private const val ASSET_DURATION_KEY = "ns_st_cl"
     }
@@ -29,10 +29,11 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
         metadataMap.clear()
         metadataMap.putAll(newMetadata.toMap())
     }
+
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
     var userConsent: ComScoreUserConsent by Delegates.observable(configuration.userConsent) { _, _, newUserConsent ->
         configuration.userConsent = newUserConsent
-        Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId).setPersistentLabel("cs_ucfr", newUserConsent.value)
-        Analytics.notifyHiddenEvent()
+        setPersistentLabel("cs_ucfr" to newUserConsent.value)
     }
 
     init {
@@ -127,5 +128,21 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, config
             BitLog.d("Starting ComScore ad play tracking")
             streamingAnalytics.playVideoAdvertisement(adMap, adType)
         }
+    }
+
+    fun setPersistentLabel(label: Pair<String, String>) {
+        val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
+        publisherConfig.setPersistentLabel(label.first, label.second)
+        Analytics.notifyHiddenEvent()
+        BitLog.d("ComScore persistent label set: [${label.first}:${label.second}]")
+    }
+
+    fun setPersistentLabels(labels: Map<String, String>)  {
+        val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
+        labels.forEach {
+            publisherConfig.setPersistentLabel(it.key, it.value)
+        }
+        Analytics.notifyHiddenEvent(labels)
+        BitLog.d("ComScore persistent labels set: ${labels.map { "${it.key}:${it.value}" }}")
     }
 }
