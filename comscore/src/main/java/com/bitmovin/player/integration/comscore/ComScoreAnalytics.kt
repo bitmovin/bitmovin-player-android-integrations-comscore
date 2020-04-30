@@ -3,6 +3,8 @@ package com.bitmovin.player.integration.comscore
 import android.content.Context
 
 import com.bitmovin.player.BitmovinPlayer
+import com.bitmovin.player.integration.comscore.util.notifyHiddenEvent
+import com.bitmovin.player.integration.comscore.util.notifyHiddenEvents
 import com.comscore.Analytics
 import com.comscore.PublisherConfiguration
 
@@ -47,7 +49,7 @@ object ComScoreAnalytics {
      * Set user consent to [ComScoreUserConsent.GRANTED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
     @Synchronized
     fun userConsentGranted() {
         if (isStarted) {
@@ -62,7 +64,7 @@ object ComScoreAnalytics {
      * Set user consent to [ComScoreUserConsent.DENIED]
      *
      */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\" to \"value\")"))
+    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
     @Synchronized
     fun userConsentDenied() {
         if (isStarted) {
@@ -81,11 +83,7 @@ object ComScoreAnalytics {
     @Synchronized
     fun setPersistentLabels(labels: Map<String, String>) {
         if (isStarted) {
-            val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
-            labels.forEach {
-                publisherConfig.setPersistentLabel(it.key, it.value)
-            }
-            Analytics.notifyHiddenEvent(labels)
+            notifyHiddenEvents(configuration.publisherId, labels)
             BitLog.d("ComScore persistent labels set: ${labels.map { "${it.key}:${it.value}" }}")
         }
     }
@@ -93,15 +91,14 @@ object ComScoreAnalytics {
     /**
      * Set a persistent label on the ComScore [PublisherConfiguration]
      *
-     * @param label - the label to set
+     * @param label - the label name
+     * @param value - the label value
      */
     @Synchronized
-    fun setPersistentLabel(label: Pair<String, String>) {
+    fun setPersistentLabel(label: String, value: String) {
         if (isStarted) {
-            val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
-            publisherConfig.setPersistentLabel(label.first, label.second)
-            Analytics.notifyHiddenEvent()
-            BitLog.d("ComScore persistent label set: [${label.first}:${label.second}]")
+            notifyHiddenEvent(configuration.publisherId, label, value)
+            BitLog.d("ComScore persistent label set: [$label:$value]")
         }
     }
 
