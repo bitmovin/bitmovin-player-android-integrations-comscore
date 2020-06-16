@@ -46,36 +46,6 @@ object ComScoreAnalytics {
     }
 
     /**
-     * Set user consent to [ComScoreUserConsent.GRANTED]
-     *
-     */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
-    @Synchronized
-    fun userConsentGranted() {
-        if (isStarted) {
-            val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
-            publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.GRANTED.value)
-            Analytics.notifyHiddenEvent()
-            BitLog.d("ComScore user consent granted")
-        }
-    }
-
-    /**
-     * Set user consent to [ComScoreUserConsent.DENIED]
-     *
-     */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
-    @Synchronized
-    fun userConsentDenied() {
-        if (isStarted) {
-            val publisherConfig = Analytics.getConfiguration().getPublisherConfiguration(configuration.publisherId)
-            publisherConfig.setPersistentLabel("cs_ucfr", ComScoreUserConsent.DENIED.value)
-            Analytics.notifyHiddenEvent()
-            BitLog.d("ComScore user consent denied")
-        }
-    }
-
-    /**
      * Set persistent labels on the ComScore [PublisherConfiguration]
      *
      * @param labels - the labels to set

@@ -33,12 +33,6 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
         metadataMap.putAll(newMetadata.toMap())
     }
 
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
-    var userConsent: ComScoreUserConsent by Delegates.observable(configuration.userConsent) { _, _, newUserConsent ->
-        configuration.userConsent = newUserConsent
-        setPersistentLabel("cs_ucfr", newUserConsent.value)
-    }
-
     init {
         BitLog.isEnabled = configuration.isDebug
         BitLog.d("Version ${BuildConfig.VERSION_NAME}")
