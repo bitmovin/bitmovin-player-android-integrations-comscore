@@ -24,21 +24,21 @@ object ComScoreAnalytics {
         if (!isStarted) {
             this.configuration = configuration
 
-            val builder = PublisherConfiguration.Builder()
-                .publisherId(configuration.publisherId)
-                .publisherSecret(configuration.publisherSecret)
-                .secureTransmission(configuration.isSecureTransmissionEnabled)
-                .applicationName(configuration.applicationName)
+            val publisherConfig = PublisherConfiguration.Builder().apply {
+                publisherId(configuration.publisherId)
+                secureTransmission(configuration.isSecureTransmissionEnabled)
 
-            with(configuration.userConsent) {
-                if (this != ComScoreUserConsent.UNKNOWN) {
-                    builder.persistentLabels(mapOf("cs_ucfr" to value))
+                // Only set user consent value if not equal to UNKNOWN
+                if (configuration.userConsent != ComScoreUserConsent.UNKNOWN) {
+                    persistentLabels(mapOf("cs_ucfr" to configuration.userConsent.value))
                 }
+
+            }.build()
+
+            with(Analytics.getConfiguration()) {
+                addClient(publisherConfig)
+                setApplicationName(configuration.applicationName)
             }
-
-            val publisherConfig = builder.build()
-
-            Analytics.getConfiguration().addClient(publisherConfig)
             Analytics.start(context)
 
             isStarted = true
