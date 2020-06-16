@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.4.0]
+
+### Changed
+- Migrated to ComScore SDK to 6.2.3
+
+### Removed
+- userConsentGranted()
+- userConsentDenied()
+
 ## [1.3.1]
 
 ### Changed

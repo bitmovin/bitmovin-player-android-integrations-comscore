@@ -24,24 +24,6 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
     }
 
     /**
-     * Set user consent to [ComScoreUserConsent.GRANTED]
-     *
-     */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
-    fun userConsentGranted() {
-        adapter.userConsent = ComScoreUserConsent.GRANTED
-    }
-
-    /**
-     * Set user consent to [ComScoreUserConsent.DENIED]
-     *
-     */
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
-    fun userConsentDenied() {
-        adapter.userConsent = ComScoreUserConsent.DENIED
-    }
-
-    /**
      * Set a persistent label on the ComScore [PublisherConfiguration]
      *
      * @param label - the name of the label

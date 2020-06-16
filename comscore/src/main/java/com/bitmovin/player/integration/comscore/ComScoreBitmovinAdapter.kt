@@ -5,8 +5,10 @@ import com.bitmovin.player.api.event.listener.*
 import com.bitmovin.player.integration.comscore.util.contentType
 import com.bitmovin.player.integration.comscore.util.notifyHiddenEvent
 import com.bitmovin.player.integration.comscore.util.notifyHiddenEvents
-import com.comscore.streaming.AdType
-import com.comscore.streaming.ReducedRequirementsStreamingAnalytics
+import com.comscore.streaming.AdvertisementMetadata
+import com.comscore.streaming.AdvertisementType
+import com.comscore.streaming.ContentMetadata
+import com.comscore.streaming.StreamingAnalytics
 import kotlin.properties.Delegates
 
 class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, private val configuration: ComScoreConfiguration, comScoreMetadata: ComScoreMetadata) {
@@ -21,7 +23,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
     }
 
     private var metadataMap = comScoreMetadata.toMap().toMutableMap()
-    private val streamingAnalytics = ReducedRequirementsStreamingAnalytics()
+    private val streamingAnalytics = StreamingAnalytics()
     private var comScoreState = ComScoreState.STOPPED
     private var currentAdDuration = 0.0
     private var currentAdOffset = 0.0
@@ -29,12 +31,6 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
     var metadata: ComScoreMetadata by Delegates.observable(comScoreMetadata) { _, _, newMetadata ->
         metadataMap.clear()
         metadataMap.putAll(newMetadata.toMap())
-    }
-
-    @Deprecated("Deprecated as of release 1.3.0", replaceWith = ReplaceWith("setPersistentLabel(\"label\", \"value\")"))
-    var userConsent: ComScoreUserConsent by Delegates.observable(configuration.userConsent) { _, _, newUserConsent ->
-        configuration.userConsent = newUserConsent
-        setPersistentLabel("cs_ucfr", newUserConsent.value)
     }
 
     init {
@@ -92,7 +88,7 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
         if (comScoreState != ComScoreState.STOPPED) {
             BitLog.d("Stopping ComScore tracking")
             comScoreState = ComScoreState.STOPPED
-            streamingAnalytics.stop()
+            streamingAnalytics.notifyPause()
         }
     }
 
@@ -108,8 +104,18 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
         if (comScoreState != ComScoreState.VIDEO) {
             stop()
             comScoreState = ComScoreState.VIDEO
+
+            val contentMetadata = ContentMetadata.Builder().apply {
+                mediaType(metadata.mediaType.contentType())
+                customLabels(metadataMap)
+            }.build()
+
+            with(streamingAnalytics) {
+                setMetadata(contentMetadata)
+                notifyPlay()
+            }
+
             BitLog.d("Starting ComScore video content tracking")
-            streamingAnalytics.playVideoContentPart(metadataMap, metadata.mediaType.contentType())
         }
     }
 
@@ -119,15 +125,25 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
             stop()
             comScoreState = ComScoreState.ADVERTISEMENT
             val adType = when {
-                bitmovinPlayer.isLive -> AdType.LINEAR_LIVE
-                offset == 0.0 -> AdType.LINEAR_ON_DEMAND_PRE_ROLL
-                offset + duration == bitmovinPlayer.duration -> AdType.LINEAR_ON_DEMAND_POST_ROLL
-                else -> AdType.LINEAR_ON_DEMAND_MID_ROLL
+                bitmovinPlayer.isLive -> AdvertisementType.LIVE
+                offset == 0.0 -> AdvertisementType.ON_DEMAND_PRE_ROLL
+                offset + duration == bitmovinPlayer.duration -> AdvertisementType.ON_DEMAND_POST_ROLL
+                else -> AdvertisementType.ON_DEMAND_MID_ROLL
             }
             val durationValue = (duration * 1000).toInt().toString()
             val adMap = mapOf(ASSET_DURATION_KEY to durationValue)
+
+            val adMetadata = AdvertisementMetadata.Builder().apply {
+                mediaType(adType)
+                customLabels(adMap)
+            }.build()
+
+            with(streamingAnalytics) {
+                setMetadata(adMetadata)
+                notifyPlay()
+            }
+
             BitLog.d("Starting ComScore ad play tracking")
-            streamingAnalytics.playVideoAdvertisement(adMap, adType)
         }
     }
 
