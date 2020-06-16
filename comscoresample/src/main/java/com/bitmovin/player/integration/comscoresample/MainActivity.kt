@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
     private fun startAppTracking() {
         val comScoreConfiguration = ComScoreConfiguration(
             publisherId = "publisherId",
-            publisherSecret = "publisherSecret",
             applicationName = "applicationName",
             userConsent = ComScoreUserConsent.GRANTED,
             isDebug = true
@@ -90,7 +89,7 @@ class MainActivity : AppCompatActivity() {
 
         // Creating a new PlayerConfiguration
         val playerConfiguration = PlayerConfiguration().apply {
-            playbackConfiguration.isAutoplayEnabled = true
+            playbackConfiguration?.isAutoplayEnabled = true
             advertisingConfiguration = AdvertisingConfiguration(preRoll, midRoll, postRoll)
             sourceConfiguration = sourceConfig
         }
