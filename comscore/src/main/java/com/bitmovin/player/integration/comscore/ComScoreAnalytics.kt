@@ -26,7 +26,7 @@ object ComScoreAnalytics {
 
             val publisherConfig = PublisherConfiguration.Builder().apply {
                 publisherId(configuration.publisherId)
-                secureTransmission(configuration.enableSecureTransmission)
+                secureTransmission(configuration.secureTransmission)
 
                 // Only set user consent value if not equal to UNKNOWN
                 if (configuration.userConsent != ComScoreUserConsent.UNKNOWN) {
@@ -39,7 +39,7 @@ object ComScoreAnalytics {
                 addClient(publisherConfig)
                 setApplicationName(configuration.applicationName)
 
-                if (configuration.enableDirectedApplicationMode) {
+                if (configuration.childDirectedAppMode) {
                     enableChildDirectedApplicationMode()
                 }
             }
