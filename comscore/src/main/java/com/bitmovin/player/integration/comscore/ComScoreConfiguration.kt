@@ -5,6 +5,6 @@ data class ComScoreConfiguration(
     val applicationName: String,
     var userConsent: ComScoreUserConsent = ComScoreUserConsent.UNKNOWN,
     val enableSecureTransmission: Boolean = false,
-    val enableDirectedApplicationMode: Boolean = false,
+    val enableChildDirectedAppMode: Boolean = false,
     val debug: Boolean = false
 )
