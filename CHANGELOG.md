@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [unreleased]
 
 ### Added
-- `enableDirectedApplicationMode` to configuration
+- ChildDirectedApplicationMode support
 
 ### Changed
 - Updated to ComScore SDK to 6.5.0
