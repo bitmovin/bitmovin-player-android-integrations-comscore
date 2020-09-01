@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             publisherId = "publisherId",
             applicationName = "applicationName",
             userConsent = ComScoreUserConsent.GRANTED,
-            isDebug = true
+            debug = true
         )
         ComScoreAnalytics.start(comScoreConfiguration, applicationContext)
     }

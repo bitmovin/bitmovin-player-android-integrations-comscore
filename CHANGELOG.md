@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [unreleased]
+
+### Added
+- ChildDirectedApplicationMode support
+
+### Changed
+- Updated to ComScore SDK to 6.5.0
+
 ## [1.4.0]
 
 ### Changed
