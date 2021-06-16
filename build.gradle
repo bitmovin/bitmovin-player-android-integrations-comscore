@@ -24,7 +24,7 @@ allprojects {
         google()
         jcenter()
         maven {
-            url 'http://bitmovin.bintray.com/maven'
+            url 'https://bitmovin.jfrog.io/artifactory/public-releases'
         }
         maven {
             url 'https://comscore.bintray.com/Analytics'
