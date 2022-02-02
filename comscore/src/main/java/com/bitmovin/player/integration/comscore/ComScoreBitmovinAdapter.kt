@@ -28,6 +28,8 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
     private var currentAdDuration = 0.0
     private var currentAdOffset = 0.0
 
+    var suppressAdAnalytics = false
+
     var metadata: ComScoreMetadata by Delegates.observable(comScoreMetadata) { _, _, newMetadata ->
         metadataMap.clear()
         metadataMap.putAll(newMetadata.toMap())
@@ -123,6 +125,12 @@ class ComScoreBitmovinAdapter(private val bitmovinPlayer: BitmovinPlayer, privat
     private fun transitionToAd(duration: Double, offset: Double) {
         if (comScoreState != ComScoreState.ADVERTISEMENT) {
             stop()
+
+            if (suppressAdAnalytics) {
+                BitLog.d("Not tracking ad content as ad analytics is suppressed")
+                return
+            }
+
             comScoreState = ComScoreState.ADVERTISEMENT
             val adType = when {
                 bitmovinPlayer.isLive -> AdvertisementType.LIVE

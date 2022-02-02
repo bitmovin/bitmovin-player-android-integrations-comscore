@@ -37,4 +37,13 @@ class ComScoreStreamingAnalytics(bitmovinPlayer: BitmovinPlayer, configuration: 
      * @param labels - the labels to set
      */
     fun setPersistentLabels(labels: Map<String, String>) = adapter.setPersistentLabels(labels)
+
+    /**
+    Enable/disable comscore ad content tracking
+    - Parameters:
+    - suppress: The enable/disable flag
+     */
+    fun suppressAdAnalytics(suppress: Boolean) {
+        adapter.suppressAdAnalytics = suppress
+    }
 }
